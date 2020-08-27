@@ -65,11 +65,7 @@ public class BlankDome {
             0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F};
     private final String SPLIT = new String(controlstr);
 
-    /**
-     * 读入TXT文件
-     */
-
-
+    //读入TXT文件
     public void readFile(String[] par) throws IOException {//T_CLAIM_REPORT.txt
         System.out.println("nb==================>" + nb);
         String[] txtStr = new String[47];
@@ -86,7 +82,7 @@ public class BlankDome {
 
         File backfile = new File(CCLJ);
         //判断文件是否为空，不为空先清空文件夹
-        if(!com1.contains("000078330000")) {
+        if (!com1.contains("000078330000")) {
             if (backfile != null && backfile.exists() && backfile.isDirectory()) {
                 File[] files = backfile.listFiles();
                 if (files != null && files.length > 0) { //此方法判断OK,需要使用数组的长度来判断。
@@ -222,19 +218,19 @@ public class BlankDome {
                                     }
                                 }*/
 
-                            }else if (txtName.equals("AGT_CODE_ZJ_ADD")) {
-                                    if (k == 4 || k == 5 || k == 6) {
-                                        if (strs[k].length() != 10 || !strs[k].contains("-")) {
-                                            //System.out.println(txt+strs[0]+"第"+n+"行数据数据项为"+strs[k]+"不符合日期格式");
-                                            outLogError.write(txt + strs[0] + "第" + n + "行数据第" + k + "个数据项为" + strs[k] +
-                                                    "不符合日期格式\r\n");
-                                        }
+                            } else if (txtName.equals("AGT_CODE_ZJ_ADD")) {
+                                if (k == 4 || k == 5 || k == 6) {
+                                    if (strs[k].length() != 10 || !strs[k].contains("-")) {
+                                        //System.out.println(txt+strs[0]+"第"+n+"行数据数据项为"+strs[k]+"不符合日期格式");
+                                        outLogError.write(txt + strs[0] + "第" + n + "行数据第" + k + "个数据项为" + strs[k] +
+                                                "不符合日期格式\r\n");
                                     }
-                                    if (k == 0 || k == 1 || k == 2|| k == 3) {
-                                        if ("".equals(strs[k])) {
-                                            outLogError.write(txt + "\n" + "第" + n + "行数据第" + k + "个数据项不得为空！\r\n");
-                                        }
+                                }
+                                if (k == 0 || k == 1 || k == 2 || k == 3) {
+                                    if ("".equals(strs[k])) {
+                                        outLogError.write(txt + "\n" + "第" + n + "行数据第" + k + "个数据项不得为空！\r\n");
                                     }
+                                }
                             } else if (txtName.equals("DEPT_INFO")) {
                                 if (k == 7 || k == 8) {
                                     if (strs[k].length() != 10 || !strs[k].contains("-")) {
@@ -243,9 +239,9 @@ public class BlankDome {
                                                 "不符合日期格式\r\n");
                                     }
                                 }
-                                if(k == 6){
-                                    if("".equals(strs[k]) || strs[k].equals("NA")){
-                                        outLogError.write(txt + "\n" + "第" + n + "行数据第" + k + "个数据项"+strs[k]+"有误！\r\n");
+                                if (k == 6) {
+                                    if ("".equals(strs[k]) || strs[k].equals("NA")) {
+                                        outLogError.write(txt + "\n" + "第" + n + "行数据第" + k + "个数据项" + strs[k] + "有误！\r\n");
                                     }
                                 }
 
@@ -426,7 +422,7 @@ public class BlankDome {
                                 if (k == 5 || k == 7 || k == 13) {
                                     strs = dateAndNum(txt, n, strs, k, outLogError);
                                 }
-                                if( k == 10 ){
+                                if (k == 10) {
                                     if ("".equals(strs[k]) || strs[k].equals("9999")) {
                                         outLogError.write(txt + "\n" + "第" + n + "行数据第" + k + "个数据项不得为空 或为9999！\r\n");
                                     }
@@ -447,7 +443,7 @@ public class BlankDome {
                                                 "\n");
                                     }
                                 }
-                                if (k == 3 || k == 4 || k== 8 || k == 9 || k == 10 || k == 16 || k == 17 || k == 21 || k == 23 || k == 24 || k == 25 || k == 40 || k == 41) {
+                                if (k == 3 || k == 4 || k == 8 || k == 9 || k == 10 || k == 16 || k == 17 || k == 21 || k == 23 || k == 24 || k == 25 || k == 40 || k == 41) {
                                     if ("".equals(strs[k])) {
                                         outLogError.write(txt + "\n" + "第" + n + "行数据第" + k + "个数据项为" + strs[k] +
                                                 "不得为空！\r\n");
@@ -502,7 +498,7 @@ public class BlankDome {
                                 if (k == 2 || k == 6 || k == 8 || k == 14 || k == 15) {
                                     strs = dateAndNum(txt, n, strs, k, outLogError);
                                 }
-                                if( k==3 || k == 11){
+                                if (k == 3 || k == 11) {
                                     if ("".equals(strs[k])) {
                                         outLogError.write(txt + "\n" + "第" + n + "行数据第" + k + "个数据项不得为空！\r\n");
                                     }
@@ -636,6 +632,7 @@ public class BlankDome {
 
                     }
 
+                    //根据保险机构代码判断是否生成日志文件
                     if (com1.contains(BXJGTJDM)) {
                         writeNameLog = new File(outPathName + "\\" + txt.replace("txt", "log"));
                         writeNameLog.createNewFile();
@@ -681,6 +678,7 @@ public class BlankDome {
         KettleUnit.runJob(zipPar, zipPathName);
     }
 
+    //日期格式
     private String[] dateAndNum(String txt, int n, String[] strs, int k, BufferedWriter outLogError) {
         char[] ckk = strs[k].trim().toCharArray();
         char[] cllk = new char[ckk.length];
@@ -770,6 +768,7 @@ public class BlankDome {
         return newCjrq;
     }
 
+    //机构名称
     private String jigou(String dm) {
         String jgmc = "";
         if (dm.equals("nb1")) {
@@ -780,13 +779,13 @@ public class BlankDome {
             jgmc = "安盛天平财产保险股份有限公司上海分公司";
         } else if (dm.equals("sh2")) {
             jgmc = "安盛天平财产保险有限公司上海分公司";
-        }else if (dm.equals("dl1")) {
+        } else if (dm.equals("dl1")) {
             jgmc = "安盛天平财产保险股份有限公司大连分公司";
-        }else if (dm.equals("dl2")) {
+        } else if (dm.equals("dl2")) {
             jgmc = "安盛天平财产保险有限公司大连分公司";
-        }else if (dm.equals("zj1")) {
+        } else if (dm.equals("zj1")) {
             jgmc = "安盛天平财产保险股份有限公司浙江分公司";
-        }else if (dm.equals("zj2")) {
+        } else if (dm.equals("zj2")) {
             jgmc = "安盛天平财产保险有限公司浙江分公司";
         }
         return jgmc;
